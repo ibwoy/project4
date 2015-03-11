@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+		 <head>
+			  <title> Ασφάλειες </title>
+			  <meta charset="UTF-8" />
+			  <link href="style.css" rel="stylesheet" type="text/css"/>
+			  <script type="text/javascript" >
+			  
+				
+				
+				function writeform(){
+					selobj=document.getElementById('selform');
+					newobj=document.getElementById('newform');
+					legobj=document.getElementById('legData');
+					p=document.getElementById('menu').selectedIndex+1;
+					if(p==1){        
+                                          txt='Μάρκα αυτοκινήτου: '+'<input type="text"/><br>';
+					  txt+='Κυβικά: '+'<input type="text"/><br>';
+					  legtxt='Στοιχεία αυτοκινήτου';
+					}
+					if(p==2){ 
+					  txt='Τετραγωνικά μέτρα: '+'<input type="text"/><br>';
+					  txt+='Υπόλοιπο στεγαστικού δανείου: '+'<input type="text"/><br>';
+  					  legtxt='Στοιχεία κατοικίας';
+					}
+					legobj.innerHTML=legtxt;
+					newobj.innerHTML=txt;
+					selobj.style.display='block';
+				}
+
+
+		</script>
+	 </head>
+
+	 <body>
+			<h2>Ασφάλεια Αυτοκινήτου - Κατοικίας</h2>
+			<p>Επιλέξτε τον τύπο της ασφάλειας, εισάγετε τα στοιχεία και πατήστε το κουμπί 'Υπολογισμός'
+			για να δείτε το κόστος της ασφάλειας</p>
+			<div>
+				<table style="width:350px; height=350px">
+				  <tr>
+					<td>
+						<select id="menu" size="2">
+							<option  onclick="writeform();" selected="selected">Ασφάλεια Αυτοκινήτου</option>
+							<option onclick="writeform();">Ασφάλεια Κατοικίας</option>
+						</select><br/>
+						<!--
+						<button onclick="writeform();">Εισαγωγή στοιχείων</button></br>
+						-->
+					</td>
+				 </tr>
+                 <tr>
+					<td>
+						<div id="selform" style="display:none">
+							<fieldset>
+							    <legend id="legData"></legend>
+								<div id="newform"></div>
+							</fieldset>
+							<button "margin:auto">Υπολογισμός</button>
+						</div> 
+					</td>
+				  </tr>
+				</table>
+			  </div><br/>
+	</body>
+</html>
