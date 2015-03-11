@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Wedding Budget</title>
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+
+	var max = 20;	//πλήθος ομοειδών στοιχείων
+	var ac=[];		//πίνακας με τα ονόματα των κατηγοριών εξόδων
+	var ac = new Array("Reception", "Photographer", "Videographer" , "Disc Jockey", "Minister",
+		               "Wedding Dress", "Tuxedo", "Limousine", "Wedding cake", "Invitations",
+					   "Flowers", "Decorator");
+	var bc= [];  //ποσ'ο για κάθε έξοδο - εισάγεται απο τον χρήστη
+	var br= [];  // ποσοστό - υπολογίζεται
+	var bct;     // αρχικό ποσό κεφαλαίου
+	var bdt;     // remaining: αρχικό ποσό - σύνολο εξόδων
+	
+	function initializeArrays(){
+		  for(i=1;i<=max;i++){
+			  
+				if (ac[i]==null)
+			  	  ac[i]='Account #'+i;
+			
+				bc[i]=0;
+				br[i]=0;
+				bct=1000;
+				bdt=0;
+				brt=100;
+		  }		 
+	}
+
+	function updateFormElements(){
+		  for(i=1;i<=max;i++){
+			document.getElementById('r'+i).style.background='#bbb';
+			document.getElementById('a'+i).value=ac[i];
+			document.getElementById('c'+i).value=bc[i];
+			document.getElementById('r'+i).value=br[i];
+		  }
+		  document.getElementById('ct').value=bct;
+		  document.getElementById('dt').value=bdt;
+		  back='#bbb';
+		  if (bdt<0){
+				back='red';
+		  }
+		  document.getElementById('dt').style.backgroundColor=back;
+	}
+	
+	function formInit(){
+		initializeArrays();
+		updateFormElements();		
+	}
+	
+	function isDigit(entry){
+		  validChar='0123456789';
+		  strlen=entry.length;
+		  if(strlen<1)
+		  {
+			  alert('Enter Something!');
+			  return false;
+		  }
+		  for(ii=0;ii<strlen;ii++){
+			if(validChar.indexOf(entry.charAt(ii))<0){
+			  alert("Entry must be digits only!");
+			  return false;
+			} 
+		   }
+		   return true;
+	}
+	
+	function updateArrays(){
+		  for(i=1;i<=max;i++){
+			ac[i]=document.getElementById('a'+i).value;
+			ival=document.getElementById('c'+i).value;
+			if(!isDigit(ival))
+			{
+				ival=0;
+			} // bad entry
+			bc[i]=parseFloat(ival,10);
+			br[i]=parseFloat(document.getElementById('r'+i).value,10);
+		  }
+		  bct=parseFloat(document.getElementById('ct').value,10);
+	}
+
+	function budRound(x,y){
+		s=Math.pow(10,y);
+		x=Math.round(x*s)/s;
+		x+='';
+		s=x.indexOf('.');
+		if(s==-1){
+			x+=".000";}
+		else{
+			x+="000";
+		}
+		s=x.indexOf('.');
+		x=x.substr(0,s+3);
+		return x;
+	}
+
+	function budFocus(){
+			document.getElementById('ct').focus();
+	}
+
+	function calculate(){
+			updateArrays();
+			bds=0;
+			bdt=0;
+			if(bct<=0){
+				return;
+			}
+			for(i=1;i<=max;i++){
+				bds+=bc[i];
+			};
+			bdt=bct-bds;
+			back='#bbb';
+			if (bdt<0){
+				back='red';
+			}
+			document.getElementById('dt').style.backgroundColor=back;
+			for(i=1;i<=max;i++){
+				br[i]=budRound(bc[i]*100/bct,2);
+			}
+			updateFormElements();
+	}
+	
+	function sendEmail() {
+    				var link = "mailto:aperson@uom.gr"
+             				 + "?cc=myCCaddress@example.com"
+             				 + "&subject=" + escape("Comments about budget calculator")
+             				 
+             			window.location.href = link;
+			}
+
+	function aboutMe() {
+	
+			alert("Developer: Sapountzi Ibram Ibraim.\nCopyrights: University of Macedonia, 2014.");
+	}
+				
+
+  </script>
+ </head>
+
+ <body onload="formInit();"><br/>
+	<form id="hBudForm" action="" onsubmit="return false;">
+		<fieldset><legend>Budget Calculator</legend>
+		<table>
+			<tr>
+				<th colspan="6">Red indicates over budget | Grey indicates read only zone!</th>
+			</tr>
+			<tr>
+				<th colspan="6">
+					Budget Target (&#8364): <input id="ct" class="boxmed" type="text"/>
+					Remaining (&#8364): <input id="dt" class="boxmed" type="text" readonly/>
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<ul class="nodec">
+						<li><input id="a1" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a2" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a3" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a4" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a5" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a6" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a7" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a8" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a9" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a10" class="boxlg" type="text" value="Account Name"/></li>
+					</ul>
+				</td>
+				<td>
+					<ul class="nodec">
+						<li>&#8364 <input id="c1" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c2" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c3" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c4" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c5" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c6" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c7" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c8" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c9" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c10" class="boxmed" type="text"/></li>
+					</ul>
+				</td>
+				<td>
+					<ul class="nodec">
+						<li><input id="r1" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r2" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r3" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r4" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r5" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r6" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r7" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r8" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r9" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r10" class="boxsm" type="text" readonly/> %</li>
+					</ul>
+				</td>
+				<td>
+					<ul class="nodec">
+						<li><input id="a11" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a12" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a13" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a14" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a15" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a16" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a17" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a18" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a19" class="boxlg" type="text" value="Account Name"/></li>
+						<li><input id="a20" class="boxlg" type="text" value="Account Name"/></li>
+					</ul>
+				</td>
+				<td>
+					<ul class="nodec">
+						<li>&#8364 <input id="c11" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c12" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c13" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c14" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c15" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c16" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c17" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c18" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c19" class="boxmed" type="text"/></li>
+						<li>&#8364 <input id="c20" class="boxmed" type="text"/></li>
+					</ul>
+				</td>
+				<td>
+					<ul class="nodec">
+						<li><input id="r11" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r12" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r13" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r14" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r15" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r16" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r17" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r18" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r19" class="boxsm" type="text" readonly/> %</li>
+						<li><input id="r20" class="boxsm" type="text" readonly/> %</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="just" colspan="4">
+					<button onclick="calculate(); budFocus();">Calculate</button>
+					<button onclick="formInit(); budFocus();">Clear Form</button>
+					<button onclick = "sendEmail(); return false;">Comments</button>
+					<button onclick = "aboutMe(); return false;">About</button>
+				</td>
+			</tr>
+		</table>
+		</fieldset>
+	</form>
+</body>
+</html>
