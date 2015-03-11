@@ -1,0 +1,151 @@
+body {
+	background:#E0F0FF;     
+	color:#000;
+	text-align:center;
+	margin:0px;
+	border:0px;
+	padding:0px
+}
+
+div {
+	margin:0px;
+	border:0px;
+	padding:0px
+}
+
+#main {
+	background:#fff;
+	color:#000;
+	width:710px;
+	height:100%;
+	text-align:left;
+	margin:auto;
+	padding:15px 25px 5px
+}
+
+/* default list and table elements */
+caption {
+	font-weight:bold;
+	font-size:150%
+}
+
+table {
+	margin:auto;
+	border:0px;
+	padding:0px
+}
+
+tr {
+	vertical-align:top
+}
+
+td {
+	width:auto;
+	margin:0px;
+	padding:1px 3px;
+    border:0px;
+	text-align:left;
+	vertical-align:top;
+	white-space:nowrap
+}
+
+th {
+	width:auto;
+	margin-left:auto;
+	margin-right:auto;
+	padding:1px 3px;
+    border:0px;
+	text-align:center;
+	vertical-align:top
+}
+
+ul {
+	list-style:disc;
+	text-align:left;
+	margin:0px;
+	margin-left:15px;
+    border:0px;
+	padding:0px
+}
+
+li {
+	margin:0px;
+	border:0px;
+	padding:0px 3px
+}
+
+/* default form elements */
+
+form {
+	margin:10px auto;
+	padding:10px;
+	text-align:center
+}
+
+fieldset {
+	width: auto;
+	margin:auto;
+	border:1px solid #000;
+	padding:2px
+}
+
+legend {
+	background:#7AA3CC;
+	color:white;
+	border:1px solid #000;
+	margin-left:10px;
+	padding:1px 4px
+}
+
+button {padding:1px 3px;overflow:visible} /* IE 7 bug fix */
+
+label {
+	font-weight:bold;
+	white-space:nowrap
+}
+
+input {
+	background:white;
+	width:88px;
+	height:20px;
+	z-index:1;
+	display:inline-block;
+	border:2px inset;
+	padding-left:2px
+}
+
+textarea {
+	background:white;
+	border:2px inset;
+	padding:1px;
+	font-weight:normal
+}
+
+select {
+	margin:2px 5px;
+	border:2px inset;
+	padding:1px
+}
+
+.boxlg{
+	width:180px
+} 
+
+.boxmed{
+	width:50px
+} 
+
+.boxsm{
+	width:25px
+}
+
+.just {
+	text-align:right
+}
+
+.nodec {
+	list-style:none;
+	margin:0px 0px 10px;
+	border:0px;
+	padding:0px
+}
